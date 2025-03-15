@@ -1,14 +1,15 @@
-# 바잔 1 : python 내장 sort 사용 - 퀵정렬이라고 알고 있다.
+
+import sys
+input = sys.stdin.readline
 n = int(input())
 
-arr = []
+arr = [0] * 10001
 
 for _ in range(n):
-    arr.append(int(input()))
+    arr[int(input())] += 1
 
-arr.sort()
-for i in arr:
-    print(i)
+for i in range(len(arr)):
+    if arr[i] != 0:
+        for _ in range(arr[i]):
+            print(i)
 
-# 이 문제는 계수정렬을 해야 한다.!!!!!!
-# 계수 정렬에 대해 알아봐야 한다.
