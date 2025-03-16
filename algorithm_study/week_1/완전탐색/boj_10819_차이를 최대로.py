@@ -13,6 +13,3 @@ for i in permutations(arr, n):
     max_sum = max(max_sum, cal_result)
 
 print(max_sum)
-
-
-
