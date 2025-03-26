@@ -1,13 +1,14 @@
+n, k = map(int,input().split())
 
-n, k = map(int, input().split())
+table = [list(map(int,input().split())) for _ in range(n)]
 
-records = [list(map(int, input().split())) for _ in range(n)]
+table.sort(key = lambda x: (-x[1], -x[2], -x[3]))
 
-records.sort(reverse=True, key=lambda x: (x[1], x[2], x[3]))
-
-idx = [records[i][0] for i in range(n)].index(k)
-
-for i in range(k):
-    if records[idx][1:] == records[i][1:]:
-        print(i+1)
+for i in range(n):
+    if table[i][0] == k:
+        idx = i
+for j in range(n):
+    # 중복 체크
+    if table[idx][1:] == table[j][1:] :
+        print(j+1)
         break
