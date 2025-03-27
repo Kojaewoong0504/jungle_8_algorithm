@@ -1,18 +1,18 @@
 import sys
+input = sys.stdin.readline
 
-word = sys.stdin.readline().rstrip()
-explosion_string = sys.stdin.readline().rstrip()
+word = input().rstrip()
+explosion_string = input().rstrip()
 
 stack = []
-ex_len = len(explosion_string)
+bomb_len = len(explosion_string)
 
 for i in range(len(word)):
     stack.append(word[i])
-    if ''.join(stack[-ex_len:]) == explosion_string:
-        for _ in range(ex_len):
+    if ''.join(stack[-bomb_len:]) == explosion_string:
+        for _ in range(bomb_len):
             stack.pop()
 
-# 결과 출력
 if stack:
     print(''.join(stack))
 else:
