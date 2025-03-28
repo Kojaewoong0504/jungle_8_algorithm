@@ -1,12 +1,16 @@
+from function_visualizer import FunctionVisualizer
 from collections import deque
 import sys
 input = sys.stdin.readline
+
+visualizer = FunctionVisualizer()
 
 n, m, v = map(int, input().split())
 graph = [[0] * (n+1) for _ in range(n+1)]
 visited = [False] * (n+1)
 
 
+@visualizer.visualize(param_names=["i"])
 def dfs(node):
     visited[node] = True
     print(str(node), end=" ")
@@ -38,3 +42,5 @@ dfs(v)
 print('')
 visited = [False] * (n+1)
 bfs(v)
+
+visualizer.render("DFS")
