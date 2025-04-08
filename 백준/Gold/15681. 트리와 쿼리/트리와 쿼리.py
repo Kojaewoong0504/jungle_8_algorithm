@@ -9,10 +9,10 @@ for _ in range(n - 1):
     con[x].append(y)
     con[y].append(x)
 
-Dy = [0] * (n + 1)
+dy = [0] * (n + 1)
 
 def DFS(x, prev):
-    global Dy
+    global dy
     Dy[x] = 1
     for y in con[x]:
         if y == prev: continue
@@ -22,4 +22,4 @@ def DFS(x, prev):
 DFS(R, -1)
 
 for _ in range(Q):
-    print(Dy[int(si())])
+    print(dy[int(si())])
