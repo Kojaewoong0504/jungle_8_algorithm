@@ -1,13 +1,13 @@
-x_list = []
-y_list = []
-for i in range(3):
-    x, y = map(int, input().split())
-    x_list.append(x)
-    y_list.append(y)
+x = []
+y = []
 
+for _ in range(3):
+    xi, yi = map(int, input().split())
+    x.append(xi)
+    y.append(yi)
 
-cal1 = (x_list[0] * y_list[1] + x_list[1] * y_list[2] + x_list[2] * y_list[0])
-cal2 = (y_list[0] * x_list[1] + y_list[1] * x_list[2] + y_list[2] * x_list[0])
+cal1 = (x[0]*y[1]) + (x[1]*y[2]) + (x[2]*y[0])
+cal2 = (y[0]*x[1]) + (y[1]*x[2]) + (y[2]*x[0])
 
 if cal1 - cal2 > 0:
     print(1)
