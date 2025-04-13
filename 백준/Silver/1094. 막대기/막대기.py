@@ -1,1 +1,4 @@
-print(str(bin(int(input())))[2:].count("1"))
+n = int(input())
+data = bin(n)
+
+print(data[2:].count("1"))
