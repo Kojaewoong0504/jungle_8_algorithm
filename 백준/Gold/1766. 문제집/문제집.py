@@ -2,29 +2,30 @@ import heapq
 
 n, m = map(int, input().split())
 
+INF = 10**8
 graph = [[] for _ in range(n+1)]
-indegree = [0] * (n+1)
-
+in_degree = [0] * (n+1)
+result = []
 
 for _ in range(m):
     a, b = map(int, input().split())
     graph[a].append(b)
-    indegree[b] += 1
+    in_degree[b] += 1
+
 
 q = []
-result = []
-
 for i in range(1, n+1):
-    if indegree[i] == 0:
+    if in_degree[i] == 0:
         heapq.heappush(q, i)
 
 while q:
-    current = heapq.heappop(q)
-    result.append(current)
-    for next in graph[current]:
-        indegree[next] -= 1
+    cur = heapq.heappop(q)
+    result.append(cur)
 
-        if indegree[next] == 0:
-            heapq.heappush(q, next)
+    for i in graph[cur]:
+        in_degree[i] -= 1
+
+        if in_degree[i] == 0:
+            heapq.heappush(q, i)
 
 print(*result)

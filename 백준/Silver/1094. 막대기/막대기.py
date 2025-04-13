@@ -1,5 +1,1 @@
-n = int(input())
-
-binary_num = str(bin(n))[2:]
-
-print(binary_num.count("1"))
+print(str(bin(int(input())))[2:].count("1"))
