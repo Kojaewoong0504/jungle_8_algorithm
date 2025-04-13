@@ -1,25 +1,21 @@
-string_data = input()
+s = input()
 
+zero_count = 0
+one_count = 0
 
-left = 1
-right = len(string_data)
+memory = s[0]
 
-z_count = 0
-o_count = 0
-tmp = string_data[0]
-while left < right:
-    data = string_data[left]
-    if tmp != data:
-        if tmp == "0":
-            z_count += 1
+for i in range(1, len(s)):
+    if memory != s[i]:
+        if memory == "0":
+            zero_count += 1
+            memory = s[i]
         else:
-            o_count += 1
-    tmp = data
-    left += 1
-
-if string_data[-1] == "0":
-    z_count += 1
+            one_count += 1
+            memory = s[i]
+if memory == "0":
+    zero_count += 1
 else:
-    o_count += 1
+    one_count += 1
 
-print(min(z_count,o_count))
+print(min(zero_count, one_count))
