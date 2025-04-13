@@ -1,11 +1,13 @@
-import sys
 from itertools import combinations
-input = sys.stdin.readline
 
-short = [int(input()) for _ in range(9)]
+little_man = []
+for _ in range(9):
+    little_man.append(int(input()))
 
-for i in combinations(short, 7):
+
+comb = combinations(little_man, 7)
+
+for i in comb:
     if sum(i) == 100:
-        for j in sorted(i):
+        for j in i:
             print(j)
-        break
