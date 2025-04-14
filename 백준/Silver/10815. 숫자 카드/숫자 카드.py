@@ -1,14 +1,15 @@
-n = int(input())
-have_list = list(map(int, input().split()))
-m = int(input())
-find_list = list(map(int, input().split()))
+import sys
 
-dict_data = {}
-for i in range(n):
-    dict_data[have_list[i]] = 0
+input = sys.stdin.readline
 
-for i in range(m):
-    if find_list[i] in dict_data:
-        print(1, end=' ')
+N = int(input())
+N_list = set(map(int, input().split()))
+
+M = int(input())
+M_list = list(map(int, input().split()))
+
+for i in M_list:
+    if i in N_list:
+        print(1, end=" ")
     else:
-        print(0, end=' ')
+        print(0, end=" ")
