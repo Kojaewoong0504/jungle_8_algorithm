@@ -1,35 +1,32 @@
-import heapq
 import sys
-input = sys.stdin.readline
+sys.setrecursionlimit(10**6)  # 재귀 호출 한도를 늘림
 
-V, E = map(int, input().split())
-graph = [[] for _ in range(V+1)] 
-in_graph = [False]*(V+1)
+def find(x):
+    global parent
+    if parent[x] != x:
+        parent[x] = find(parent[x])  # 경로 압축
+    return parent[x]
 
-for _ in range(E) :
-    v1, v2, weight = map(int, input().split())
-    graph[v1].append((weight, v2))
-    graph[v2].append((weight, v1))
+def union(x, y):
+    pX, pY = find(x), find(y)
+    if pX > pY:
+        parent[pX] = pY
+    else:
+        parent[pY] = pX
 
-node_cnt = 0 #그래프에 포함된 노드 개수
-weight_sum = 0
+V, E = map(int, sys.stdin.readline().split())
+arr, parent = [], [i for i in range(V)]  # 초기에는 자기 자신을 부모로 설정
 
-#그래프에 포함된 노드들에 인접한 간선 모음
-edge_heap = [(0,1)] #가중치, 새로 추가될 노드번호
-while node_cnt < V :
-    w, node = heapq.heappop(edge_heap)
+for _ in range(E):
+    v1, v2, dist = map(int, sys.stdin.readline().split())
+    arr.append((dist, v1-1, v2-1))
+arr.sort()
 
-    #이미 그래프에 포함된 노드면 패스
-    if in_graph[node] :
+mst = 0
+for a in arr:
+    if find(a[1]) == find(a[2]):
         continue
+    union(a[1], a[2])
+    mst += a[0]
 
-    #새로운 노드 추가
-    in_graph[node] = True
-    node_cnt += 1
-    weight_sum += w
-
-    #새로 추가된 노드의 간선들을 힙에 추가
-    for edge in graph[node] :
-        heapq.heappush(edge_heap, edge)
-
-print(weight_sum)
+print(mst)
