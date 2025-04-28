@@ -1,18 +1,20 @@
 import sys
 input = sys.stdin.readline
 
-N = int(input())
-ingredients = [tuple(map(int, input().split())) for _ in range(N)]
+n = int(input())
 
-min_diff = float('inf')
+item_list = [list(map(int, input().split())) for _ in range(n)]
 
-for mask in range(1, 1 << N):  # 공집합 제외
+min_result = float('INF')
+
+for i in range(1, 1 << n):
     sour = 1
-    bitter = 0
-    for i in range(N):
-        if mask & (1 << i):
-            sour *= ingredients[i][0]
-            bitter += ingredients[i][1]
-    min_diff = min(min_diff, abs(sour - bitter))
+    acerbity = 0
 
-print(min_diff)
+    for j in range(n):
+        if i & (1 << j):
+            sour *= item_list[j][0]
+            acerbity += item_list[j][1]
+    min_result = min(min_result, abs(sour - acerbity))
+
+print(min_result)
