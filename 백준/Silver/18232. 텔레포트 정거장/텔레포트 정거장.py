@@ -1,4 +1,7 @@
+import sys
 from collections import deque
+
+input = sys.stdin.readline
 
 n, m = map(int, input().split())
 s, e = map(int, input().split())
