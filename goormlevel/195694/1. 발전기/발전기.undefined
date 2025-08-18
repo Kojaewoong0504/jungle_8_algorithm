@@ -1,0 +1,57 @@
+import java.io.*;
+import java.util.*;
+
+class Main {
+	static int N;
+	static int[][] grid;
+	static boolean[][] visited;
+	static final int[] dr = {-1, 1, 0, 0};
+	static final int[] dc = {0, 0, -1, 1};
+	
+	static void bfs(int sr, int sc) {
+		Deque<int[]> q = new ArrayDeque<>();
+		visited[sr][sc] = true;
+		q.offer(new int[]{sr, sc});
+
+		while (!q.isEmpty()) {
+				int[] cur = q.poll();
+				int r = cur[0], c = cur[1];
+
+				for (int k = 0; k < 4; k++) {
+						int nr = r + dr[k];
+						int nc = c + dc[k];
+						if (nr < 0 || nr >= N || nc < 0 || nc >= N) continue;
+						if (visited[nr][nc]) continue;
+						if (grid[nr][nc] == 0) continue;  // 집이 아니면 패스
+						visited[nr][nc] = true;
+						q.offer(new int[]{nr, nc});
+				}
+		}
+	}
+	
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		N = Integer.parseInt(br.readLine().trim());
+		grid = new int[N][N];
+
+		for (int i = 0; i < N; i++) {
+				StringTokenizer st = new StringTokenizer(br.readLine());
+				for (int j = 0; j < N; j++) {
+						grid[i][j] = Integer.parseInt(st.nextToken());
+				}
+		}
+
+		visited = new boolean[N][N]; // 기본값이 false로 채워짐
+		int generators = 0;
+
+		for (int i = 0; i < N; i++) {
+				for (int j = 0; j < N; j++) {
+						if (grid[i][j] == 1 && !visited[i][j]) {
+								generators++;
+								bfs(i, j);
+						}
+				}
+		}
+		System.out.println(generators);
+	}
+}
