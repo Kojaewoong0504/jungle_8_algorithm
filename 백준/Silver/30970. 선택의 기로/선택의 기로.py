@@ -1,4 +1,7 @@
+import sys
 import copy
+
+input = sys.stdin.readline
 
 n = int(input())
 items = [list(map(int, input().split())) for _ in range(n)]
