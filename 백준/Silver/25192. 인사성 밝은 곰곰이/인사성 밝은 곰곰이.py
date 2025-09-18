@@ -1,21 +1,17 @@
-from collections import defaultdict
+import sys
+input = sys.stdin.readline
 
 n = int(input())
+seen = set()
+ans = 0
 
-is_enter = False
-count = 0
-chat_dict = {}
+for _ in range(n):
+    s = input().strip()   
+    if s == "ENTER":
+        seen.clear()      
+    else:
+        if s not in seen: 
+            ans += 1
+            seen.add(s)
 
-for i in range(n):
-    chat = input()
-    if chat == "ENTER":
-        is_enter = True
-        chat_dict = defaultdict(int)
-        continue
-
-    if is_enter:
-        if chat_dict[chat] == 0:
-            count += 1
-        chat_dict[chat] += 1
-
-print(count)
+print(ans)
