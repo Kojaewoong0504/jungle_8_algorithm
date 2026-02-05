@@ -1,16 +1,12 @@
 N = int(input())
-A = input().split()
-removed = 0
+arr = list(map(int, input().split()))
 
-for i in range(N):
-    if i == N - removed:
-        print(removed)
-        quit()
-    while A[i] != str(i + 1):
-        del A[i]
-        removed += 1
-        if i == N - removed:
-            print(removed)
-            quit()
+start = 1
+cnt = 0
+for a in arr:
+    if a == start:
+        start += 1
+    else:
+        cnt += 1
 
-print(removed)
+print(cnt)
