@@ -1,22 +1,31 @@
 n = int(input())
 cranes = list(map(int, input().split()))
 m = int(input())
-boxs = list(map(int, input().split()))
+boxes = list(map(int, input().split()))
 
 cranes.sort(reverse=True)
-boxs.sort(reverse=True)
+boxes.sort(reverse=True)
 
-if boxs[0] > cranes[0]:
+if boxes[0] > cranes[0]:
     print(-1)
     exit()
 
-cnt = 0
-while len(boxs) > 0:
-    for crane in cranes:
-        for box in boxs:
-            if crane >= box:
-                boxs.remove(box)
-                break
-    cnt += 1
+visited = [False] * m
+pos = [0] * n
+count = 0
+moved = 0
 
-print(cnt)
+time = 0
+
+while moved < m:
+    for i in range(n):
+        while pos[i] < m:
+            if not visited[pos[i]] and cranes[i] >= boxes[pos[i]]:
+                visited[pos[i]] = True
+                pos[i] += 1
+                moved += 1
+                break
+            pos[i] += 1
+    time += 1
+
+print(time)
