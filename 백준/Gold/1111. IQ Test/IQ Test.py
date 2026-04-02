@@ -1,0 +1,35 @@
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+arr = list(map(int, input().split()))
+
+if N == 1:
+    print("A")
+elif N == 2:
+    if arr[0] == arr[1]:
+        print(arr[0])
+    else:
+        print("A")
+else:
+    if arr[1] == arr[0]:
+        if all(arr[i] == arr[0] for i in range(N)):
+            print(arr[0])
+        else:
+            print("B")
+    else:
+        if (arr[2] - arr[1]) % (arr[1] - arr[0]) != 0:
+            print("B")
+        else:
+            a = (arr[2] - arr[1]) // (arr[1] - arr[0])
+            b = arr[1] - arr[0] * a
+            valid = True
+            for i in range(N - 1):
+                if arr[i] * a + b != arr[i + 1]:
+                    valid = False
+                    break
+
+            if not valid:
+                print("B")
+            else:
+                print(arr[-1] * a + b)
