@@ -1,23 +1,18 @@
-import sys
+from math import lcm
 
-def gcd(a, b):
-    if a % b == 0:
-        return b
-    return gcd(b, a % b)
+t = int(input())
 
-def lcm(a, b):
-    return m * n / gcd(a, b)
-
-t = int(sys.stdin.readline().rstrip())
 for _ in range(t):
-    m, n, x, y = map(int, sys.stdin.readline().rstrip().split())
-    max_year = lcm(m , n)
-    answer = x
-    while answer <= max_year: # 멸망해
-        if (answer - 1) % n + 1 == y:
+    m, n, x, y = map(int, input().split())
+    end = lcm(m, n)
+
+    ans = -1
+    k = x
+
+    while k <= end:
+        if ((k - 1) % n) + 1 == y:
+            ans = k
             break
-        answer += m     # x의 최대값인 m 만큼 증가
-    if answer > max_year:
-        print(-1)
-    else:
-        print(answer)
+        k += m
+
+    print(ans)
